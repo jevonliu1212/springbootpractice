@@ -1,8 +1,4 @@
-server:
-  port:
-    8888
-    
-    
+
 info:
   name:
     liujianwei
@@ -10,3 +6,7 @@ info:
     29
   uuid:
     ${random.uuid}
+    
+spring:
+  profiles:
+    active: test
