@@ -6,3 +6,7 @@ server:
 info:
   name:
     liujianwei
+  age:
+    29
+  uuid:
+    ${random.uuid}
