@@ -25,4 +25,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return null;
 	}
 
+	@Override
+	public int add(Employee e) {
+		return jdbcTemplate.update("insert into employee(name,mobile) values(?,?)", e.getName(),e.getMobile());
+	}
+
 }

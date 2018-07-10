@@ -4,4 +4,6 @@ import com.springboot.entity.Employee;
 
 public interface EmployeeService {
 	Employee getById(Long id);
+	
+	int add(Employee e);
 }
