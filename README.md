@@ -13,5 +13,5 @@
 遵循规则命名，如`findByLastnameAndFirstname`对应 where x.lastname = ? and x.firstname = ?（还未深入研究）
 
 遇到问题：
-添加jdbc或者jpa依赖后，如果还为配置数据源信息启动就会报错，因为启动时spring boot发现依赖了这两个包后就会去加载数据源，查询
+添加jdbc或者jpa依赖后，如果还为配置数据源信息启动就会报错，因为启动时`spring boot`发现依赖了这两个包后就会去加载数据源，查询
 不到就会报错。
