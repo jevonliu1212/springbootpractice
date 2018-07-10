@@ -1,8 +1,7 @@
-package com.springboot.dao;
+package com.springboot.service;
 
 import com.springboot.entity.Employee;
 
-public interface EmployeeDao {
-
+public interface EmployeeService {
 	Employee getById(Long id);
 }
