@@ -6,4 +6,5 @@ import com.springboot.entity.Account;
 
 public interface AccountDao extends JpaRepository<Account,Integer>{
 
+	Account findByNameAndMoney(String name,double money);
 }

@@ -3,6 +3,7 @@ package com.springboot.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 public class Account {
@@ -14,6 +15,29 @@ public class Account {
 	private String name;
 	
 	private Double money;
+	
+	private String remark;
+
+	private String pwd;
+	
+	
+	
+	
+	public String getPwd() {
+		return pwd;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 
 	public Integer getId() {
 		return id;

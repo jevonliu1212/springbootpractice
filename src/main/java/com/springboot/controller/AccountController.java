@@ -23,4 +23,9 @@ public class AccountController {
 		account.setMoney(money);
 		accountDao.save(account);
 	}
+	
+	@RequestMapping(value = "/query",method = RequestMethod.POST)
+	public Account query(@RequestParam("name")String name,@RequestParam("money")double money){
+		return accountDao.findByNameAndMoney(name, money);
+	}
 }
