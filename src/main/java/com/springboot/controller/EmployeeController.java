@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.Mapper.EmployeeMapper;
 import com.springboot.entity.Employee;
 import com.springboot.service.EmployeeService;
 
@@ -17,10 +18,12 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeService;
+	@Autowired
+	private EmployeeMapper employeeMapper;
 	
 	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
 	public Employee getById(@PathVariable("id")long id){
-		return employeeService.getById(id);
+		return employeeMapper.get(id);
 	}
 	
 	@RequestMapping(value = "/add",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
