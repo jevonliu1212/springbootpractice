@@ -10,7 +10,9 @@
 映射数据库字段。
 - `pring Data JPA`是基于ORM框架和JPA规范的一套JPA应用框架，简化了开发者对数据集操作的过程，例如使用dao层接口继承`JpaRepository`类即可生成
 诸多对表的基本增删改查操作，无需书写具体的实现，使用时直接注入dao接口即可使用。也可以根据需要自定义sql，只是定义方法是需要
-遵循规则命名，如`findByLastnameAndFirstname`对应 where x.lastname = ? and x.firstname = ?（还未深入研究）
+遵循规则命名，如`findByLastnameAndFirstname`对应 where x.lastname = ? and x.firstname = ?（还未深入研究）。配置`spring.jpa.properties.hibernate.hbm2ddl.auto`参数可自动根据`entity`维护数据库表结构,`create`是每次都新建表，`update`会根据变化修改表结构,`validate`校验变化但是不修改。
+
+
 
 遇到问题：
 添加jdbc或者jpa依赖后，如果还为配置数据源信息启动就会报错，因为启动时`spring boot`发现依赖了这两个包后就会去加载数据源，查询
