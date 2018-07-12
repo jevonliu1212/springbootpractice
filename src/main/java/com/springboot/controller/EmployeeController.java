@@ -24,7 +24,7 @@ public class EmployeeController {
 	
 	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
 	public Employee getById(@PathVariable("id")long id){
-		return employeeMapper.get(id);
+		return employeeService.getById(id);
 	}
 	
 	@RequestMapping(value = "/add",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
