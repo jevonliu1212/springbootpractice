@@ -67,7 +67,7 @@ public class RedisConfig extends CachingConfigurerSupport {
 	@Bean
 	public CacheManager cacheManager(@SuppressWarnings("rawtypes") RedisTemplate redisTemplate) {
 		RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);
-	    cacheManager.setDefaultExpiration(10);//设置缓存保留时间（seconds）
+	  //  cacheManager.setDefaultExpiration(10);//设置缓存保留时间（seconds）
 		return cacheManager;
 	}
 
