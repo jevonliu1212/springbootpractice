@@ -20,4 +20,11 @@
 不到就会报错。
 
 ### redis篇
-- **整合redis**：使用方法类似`jdbcTemplate`，添加`spring-boot-starter-data-redis`依赖，配置`redis`数据源，使用`stringRedisTemplate`获得`ValueOperations`对象，就可以对`redis`数据进行操作。
+**整合redis**：使用方法类似`jdbcTemplate`，添加`spring-boot-starter-data-redis`依赖，配置`redis`数据源，使用`stringRedisTemplate`获得`ValueOperations`对象，就可以对`redis`数据进行操作。
+
+**redis缓存**:`redis`缓存可以减少系统与数据库的交互，在同一个方法，且传入参数相同的情况下请求，就会直接取出redis中缓存好的数据直接返回，提升效率，节约资源。存入`redis`的缓存格式为:`"[\"com.springboot.entity.Employee\",{\"id\":1,\"name\":\"333\",\"mobile\":\"333\"}]"`
+
+- 开启`redis`缓存需要配置`cacheManager`，`redisTemplate`等`bean`,里面包含了对象的序列化和反序列化处理，`redis`缓存的`key`也是可以指定自动生成规则的，`cacheManager`中可以设置缓存过期时间。
+- `@Cacheable`需要设置`value`(`cache`名，可以理解为一个分组，下面可以有很多缓存对象)，`key`(存入`redis`时的`key`)，例如：`@Cacheable(value = "emp",key="#id")`，其中`id`是传入方法的变量名，该标签加在方法上面，第一次调用spring boot就会以设置的key为键，返回的对象为`value`存入`redis`。往后每次调用方法都会先去`redis`查询是否已有对应缓存，有的话直接返回不会进方法，没有的话就会查询并返回结果，并存到`redis`中。
+- `@CachePut`跟`@Cacheable`有所区别，参数设置和`@Cacheable`一样，但是使用`@CachePut`后方法依旧会被调用，并且会根据`key`更新`redis`中的缓存。
+- `@CacheEvict`用来清除缓存，需要设置`value`值指定需要删除的缓存，`value`可以接受数组，且设置`allEntries=true`就可以将指定缓存下的缓存数据全部清除。例如：`@CacheEvict(value = "emp",key ="#id",allEntries=true)`
