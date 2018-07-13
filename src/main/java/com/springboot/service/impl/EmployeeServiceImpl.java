@@ -16,7 +16,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	private EmployeeDao employeeDao;
 
-	@Cacheable(value = "emp",key="'emp'.concat(#id)") 
+	//@Cacheable(value = "emp",key="'emp'.concat(#id)") 
 	@Override
 	public Employee getById(Long id) {
 		System.out.println("getById数据库查询");
