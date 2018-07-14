@@ -29,6 +29,7 @@ public class EmployeeController {
 	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
 	public Employee getById(@PathVariable("id")long id){
 		logger.info("查询人员信息id={}",id);
+		logger.debug("debug...查询人员信息id={}",id);
 		return employeeMapper.get(id);
 	}
 	
