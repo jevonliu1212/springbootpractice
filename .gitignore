@@ -1,1 +1,7 @@
 /target/
+/.gitignore
+/.project
+/.classpath
+/.settings/
+/.factorypath
+*.iml
