@@ -154,4 +154,16 @@ Year:可出现", - * /"四个字符，有效范围为1970-2099年
     </logger>
 ```
 
+**4.springProfile节点**:可以通过指定name属性来使各节点在不同的环境下生效，达到不同环境不同输出的效果。
+
+``` xml 
+
+   <springProfile name="dev" >
+    <logger name="com.springboot.controller" level="DEBUG"  additivity="false">
+        <appender-ref ref="STDOUT" />
+     </logger>
+   </springProfile>  
+```
+
+
 

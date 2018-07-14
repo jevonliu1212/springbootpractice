@@ -44,16 +44,17 @@
     </appender> 
     
     <!-- 日志输出级别 -->
-    <root level="DEBUG">
+    <root level="INFO">
          <appender-ref ref="FILE" />
          <appender-ref ref="STDOUT" />
     </root> 
     
     
    <!--分包输出日志,分包指向-->
+   <springProfile name="dev">
    <logger name="com.springboot.controller" level="DEBUG"  additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
-     
+   </springProfile>
 
 </configuration>
