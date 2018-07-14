@@ -134,7 +134,7 @@ Year:可出现", - * /"四个字符，有效范围为1970-2099年
     </root> 
 ```
 
-**2.appender节点**:定义日志的输出格式或者存储策略。可以通过定义pattern来规定输出的格式，比如%d{yyyy-MM-dd HH:mm:ss} [%p] [%t] %c{36} - %m%n，%d表示显示日期格式，%t 显示线程名，%m显示输出信息等等。像RollingFileAppender这种输出日志文件的appender还需要配置存储策略，比如存储多少天，文件名，最大容量等等。
+**2.appender节点**:定义日志的输出格式或者存储策略。可以通过定义 `pattern` 来规定输出的格式，比如 `%d{yyyy-MM-dd HH:mm:ss} [%p] [%t] %c{36} - %m%n`，`%d` 表示显示日期格式，`%t` 显示线程名，`%m` 显示输出信息等等。像 `RollingFileAppender` 这种输出日志文件的`appender` 还需要配置存储策略，比如存储多少天，文件名，最大容量等等。
 
 ``` xml
 
@@ -145,7 +145,7 @@ Year:可出现", - * /"四个字符，有效范围为1970-2099年
     </appender>
 ```
 
-**3.logger节点**:日志记录器，appender配置的执行者。可以针对某个包或者类定制输出格式，只需要在class属性中定义路径。
+**3.logger节点**:日志记录器，`appender` 配置的执行者。可以针对某个包或者类定制输出格式，只需要在 `class` 属性中定义路径。
 
 ``` xml
 
@@ -154,15 +154,15 @@ Year:可出现", - * /"四个字符，有效范围为1970-2099年
     </logger>
 ```
 
-**4.springProfile节点**:可以通过指定name属性来使各节点在不同的环境下生效，达到不同环境不同输出的效果。
+**4.springProfile节点**:可以通过指定 `name` 属性来使各节点在不同的环境下生效，达到不同环境不同输出的效果。
 
 ``` xml 
 
-   <springProfile name="dev" >
+   <springProfile name="dev">
     <logger name="com.springboot.controller" level="DEBUG"  additivity="false">
         <appender-ref ref="STDOUT" />
      </logger>
-   </springProfile>  
+   </springProfile>
 ```
 
 
