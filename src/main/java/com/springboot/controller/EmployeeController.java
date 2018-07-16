@@ -1,19 +1,33 @@
 package com.springboot.controller;
 
 
+<<<<<<< HEAD
 import java.io.File;
 import java.io.IOException;
 
+=======
+import java.util.HashMap;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+>>>>>>> 7369944bcaf6d178da3583ac0886b11a27fe1bdb
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+<<<<<<< HEAD
 import org.springframework.web.multipart.MultipartFile;
+=======
+import org.springframework.web.client.RestTemplate;
+>>>>>>> 7369944bcaf6d178da3583ac0886b11a27fe1bdb
 
+import com.alibaba.fastjson.JSON;
 import com.springboot.Mapper.EmployeeMapper;
 import com.springboot.entity.Employee;
 import com.springboot.service.EmployeeService;
@@ -21,15 +35,26 @@ import com.springboot.service.EmployeeService;
 @RestController
 @RequestMapping("/emp")
 public class EmployeeController {
+	private final static Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
 	@Autowired
 	private EmployeeService employeeService;
 	@Autowired
 	private EmployeeMapper employeeMapper;
+	@Autowired
+	private RestTemplate restTemplate;
 	
 	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
 	public Employee getById(@PathVariable("id")long id){
-		return employeeService.getById(id);
+		logger.info("查询人员信息id={}",id);
+		logger.debug("debug...查询人员信息id={}",id);
+		
+		Map<String,Object> postData = new HashMap<>();
+		postData.put("id", 1);
+		postData.put("name", "222");
+		postData.put("mobile","444");
+		System.out.println("=========="+restTemplate.postForEntity("http://localhost:8888/emp/update", postData, null));
+		return employeeMapper.get(id);
 	}
 	
 	@RequestMapping(value = "/add",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -39,6 +64,9 @@ public class EmployeeController {
 	
 	@RequestMapping(value = "/update",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public void update(@RequestBody Employee e){
+//		ResponseEntity<Employee>  res =restTemplate.getForEntity("http://localhost:8888/emp/1", Employee.class);
+//		System.out.println("=========="+res.getBody().getName());
+		logger.info("參數====={}",JSON.toJSONString(e));
 		employeeMapper.update(e);
 	}
 	

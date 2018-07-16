@@ -2,6 +2,8 @@ package com.springboot.service.impl;
 
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -13,13 +15,16 @@ import com.springboot.service.EmployeeService;
 @Transactional
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
+	
+	private final static Logger logger = LoggerFactory.getLogger(EmployeeServiceImpl.class);
+	
 	@Autowired
 	private EmployeeDao employeeDao;
 
 	//@Cacheable(value = "emp",key="'emp'.concat(#id)") 
 	@Override
 	public Employee getById(Long id) {
-		System.out.println("getById数据库查询");
+		logger.info("sevice getByid");
 		return employeeDao.getById(id);
 	}
 

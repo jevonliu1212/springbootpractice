@@ -119,3 +119,51 @@ Year:可出现", - * /"四个字符，有效范围为1970-2099年
 （6）`0 15 10 ? * 6L 2002-2005`   2002年至2005年的每月的**最后一个星期五**上午10:15触发 
 
 （7）`0 15 10 ? * 6#3`   每月的**第三个星期五**上午10:15触发
+
+#### 5. logback配置
+
+日志的输出也是系统的重要的组成部分，合理的日志对于日后追踪系统报错原因会有很大的帮助。配置 `logback` 需要在 `src/main/resources` 下新建 `logback.xml` ，在文件中定制自己日志的输出和存储方式。下面介绍主要配置参数：
+
+**1. root节点**:必选节点，通过 `level `配置整个项目的基本输出级别,`level` 属性级别由低到高为`TRACE < DEBUG < INFO < WARN < ERROR < FATAL`。
+
+``` xml
+
+    <root level="DEBUG">
+         <appender-ref ref="FILE" />
+         <appender-ref ref="STDOUT" />
+    </root> 
+```
+
+**2. appender节点**:定义日志的输出格式或者存储策略。可以通过定义 `pattern` 来规定输出的格式，比如 `%d{yyyy-MM-dd HH:mm:ss} [%p] [%t] %c{36} - %m%n`，`%d` 表示显示日期格式，`%t` 显示线程名，`%m` 显示输出信息等等。像 `RollingFileAppender` 这种输出日志文件的`appender` 还需要配置存储策略，比如存储多少天，文件名，最大容量等等。
+
+``` xml
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"> 
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>   
+        </encoder> 
+    </appender>
+```
+
+**3. logger节点**:日志记录器，`appender` 配置的执行者。可以针对某个包或者类定制输出格式，只需要在 `class` 属性中定义路径。
+
+``` xml
+
+    <logger name="com.springboot.controller" level="DEBUG"  additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+```
+
+**4. springProfile节点**:可以通过指定 `name` 属性来使各节点在不同的环境下生效，达到不同环境不同输出的效果。
+
+``` xml 
+
+   <springProfile name="dev">
+    <logger name="com.springboot.controller" level="DEBUG"  additivity="false">
+        <appender-ref ref="STDOUT" />
+     </logger>
+   </springProfile>
+```
+
+
+
