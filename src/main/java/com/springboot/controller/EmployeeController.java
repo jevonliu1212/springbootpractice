@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +24,7 @@ import org.springframework.web.client.RestTemplate;
 import com.alibaba.fastjson.JSON;
 import com.springboot.Mapper.EmployeeMapper;
 import com.springboot.entity.Employee;
+import com.springboot.service.AsyncService;
 import com.springboot.service.EmployeeService;
 
 @RestController
@@ -37,6 +38,8 @@ public class EmployeeController {
 	private EmployeeMapper employeeMapper;
 	@Autowired
 	private RestTemplate restTemplate;
+	@Autowired
+	private AsyncService asyncService;
 	
 	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
 	public Employee getById(@PathVariable("id")long id){
@@ -48,11 +51,14 @@ public class EmployeeController {
 		postData.put("name", "222");
 		postData.put("mobile","444");
 		System.out.println("=========="+restTemplate.postForEntity("http://localhost:8888/emp/update", postData, null));
+		
+		asyncService.asyncTest();
+		
 		return employeeMapper.get(id);
 	}
 	
 	@RequestMapping(value = "/add",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public void add(@RequestBody Employee e){
+	public void add(@Validated@RequestBody Employee e){
 		employeeService.add(e);
 	}
 	
@@ -97,4 +103,6 @@ public class EmployeeController {
 		}
         return "true";
 	}
+	
+	
 }

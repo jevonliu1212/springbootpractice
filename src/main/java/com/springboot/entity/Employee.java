@@ -1,9 +1,12 @@
 package com.springboot.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Employee {
 
 	private Long id;
 	
+	@NotBlank(message = "name不能为空")
 	private String name;
 	
 	private String mobile;
