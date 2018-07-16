@@ -165,5 +165,34 @@ Year:可出现", - * /"四个字符，有效范围为1970-2099年
    </springProfile>
 ```
 
+#### 6. RestTemplate消费服务
 
+`RestTemplate` 是封装了的 `http` 请求，可以更加简单的访问 `rest` 服务，不需要使用原生的`http` 。配置方面只需要在 `context` 里添加相应的 `bean` ，即可直接将 `RestTemplate` 注入使用，方法有诸如 `getForEntity` ，`postForEntity` 等等，方法名对应请求方式 `get` 和`post` ，传入对应的 `class` 类型可以将返回值映射成对应的对象。
 
+``` java
+
+ResponseEntity<Employee>  res =restTemplate.getForEntity("http://localhost:8888/emp/1", Employee.class);
+
+```
+
+``` java
+
+Map<String,Object> postData = new HashMap<>();
+postData.put("id", 1);
+postData.put("name", "222");
+postData.put("mobile","444");
+restTemplate.postForEntity("http://localhost:8888/emp/update", postData, null);
+		
+```
+
+#### 7. 文件上传
+
+使用 `MultipartFile` 接收需要上传的文件，可以获取到文件的名称和大小等数据，通过流的方式进行上传。上传的文件也可以通过在 `application.properties` 配置来限制，超出范围就会抛出异常，配置参数如下：
+
+``` xml
+
+spring.http.multipart.max-file-size=128KB
+
+spring.http.multipart.max-request-size=128KB
+
+```
