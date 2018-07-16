@@ -105,3 +105,19 @@
 2018-07-13 15:06:08.977  INFO 16988 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
 2018-07-13 15:06:09.111  WARN 16988 --- [main] o.h.b.i.SessionFactoryBuilderImpl        : Unrecognized hbm2ddl_auto value : none.  Supported values include create, create-drop, update, and validate.  Ignoring
 2018-07-13 15:06:10.339  INFO 16988 --- [main] c.springboot.SpringbootFirstApplication  : Started SpringbootFirstApplication in 3.988 seconds (JVM running for 4.275)
+2018-07-16 11:05:57.653  INFO 9844 --- [main] c.springboot.SpringbootFirstApplication  : Starting SpringbootFirstApplication on 20170423-122223 with PID 9844 (D:\wks_branch\springbootpractice\target\classes started by Administrator in D:\wks_branch\springbootpractice)
+2018-07-16 11:05:57.692  INFO 9844 --- [main] c.springboot.SpringbootFirstApplication  : The following profiles are active: dev
+2018-07-16 11:05:59.183  INFO 9844 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2018-07-16 11:05:59.184  INFO 9844 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.11
+2018-07-16 11:05:59.296  INFO 9844 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-07-16 11:06:00.261  INFO 9844 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-07-16 11:06:00.332  INFO 9844 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2018-07-16 11:06:00.333  INFO 9844 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2018-07-16 11:06:00.335  INFO 9844 --- [main] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2018-07-16 11:06:00.431  INFO 9844 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-07-16 11:06:00.525  INFO 9844 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2018-07-16 11:06:00.664  WARN 9844 --- [main] o.h.b.i.SessionFactoryBuilderImpl        : Unrecognized hbm2ddl_auto value : none.  Supported values include create, create-drop, update, and validate.  Ignoring
+2018-07-16 11:06:02.087  INFO 9844 --- [main] c.springboot.SpringbootFirstApplication  : Started SpringbootFirstApplication in 4.821 seconds (JVM running for 5.353)
+2018-07-16 11:06:30.484  INFO 9844 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'

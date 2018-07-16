@@ -1,6 +1,9 @@
 package com.springboot.controller;
 
 
+import java.io.File;
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.springboot.Mapper.EmployeeMapper;
 import com.springboot.entity.Employee;
@@ -41,5 +45,34 @@ public class EmployeeController {
 	@RequestMapping(value = "/delete",method = RequestMethod.POST)
 	public void update(@RequestParam long id){
 		employeeMapper.delete(id);
+	}
+	
+	
+	@RequestMapping(value = "/upload",method = RequestMethod.POST)
+	public String upload(@RequestParam("file") MultipartFile file){
+		if(file.isEmpty()){
+            return "false";
+        }
+        String fileName = file.getOriginalFilename();
+        int size = (int) file.getSize();
+        System.out.println(fileName + "-->" + size);
+       
+        String path = "E:/test" ;
+        File dest = new File(path + "/" + fileName);
+        if(!dest.getParentFile().exists()){ //判断文件父目录是否存在
+            dest.getParentFile().mkdir();
+        }
+        
+        try {
+			file.transferTo(dest);
+			
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return "true";
 	}
 }
