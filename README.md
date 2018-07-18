@@ -196,3 +196,17 @@ spring.http.multipart.max-file-size=128KB
 spring.http.multipart.max-request-size=128KB
 
 ```
+
+#### 8. 整合ActiveMQ
+
+配置类似redis，配置ActiveMQ相关参数，使用template模版对象JmsMessagingTemplate即可向指定队列发送消息，接收方使用监听器（@JmsListener注解即可）监听队列，即可消费队列里的内容。
+
+application.properties配置:
+
+``` xml
+
+spring.activemq.broker-url=tcp://localhost:61616
+spring.activemq.in-memory=true
+spring.activemq.pool.enabled=false
+
+```
