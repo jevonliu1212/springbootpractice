@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +44,7 @@ public class EmployeeController {
 	private AsyncService asyncService;
 	
 	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
-	public Employee getById(@PathVariable("id")long id){
+	public Employee getById(@PathVariable("id")long id) throws InterruptedException, ExecutionException{
 		logger.info("查询人员信息id={}",id);
 		logger.debug("debug...查询人员信息id={}",id);
 		
@@ -52,7 +54,8 @@ public class EmployeeController {
 		postData.put("mobile","444");
 		System.out.println("=========="+restTemplate.postForEntity("http://localhost:8888/emp/update", postData, null));
 		
-		asyncService.asyncTest();
+		//Future<String> res = asyncService.asyncTest();
+		//logger.info("future====={}",res.get());
 		
 		return employeeMapper.get(id);
 	}
