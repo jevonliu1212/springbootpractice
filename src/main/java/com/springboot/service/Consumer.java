@@ -15,7 +15,7 @@ public class Consumer {
 		logger.info("消息={}，处理开始。。。。", msg);
 
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -23,4 +23,5 @@ public class Consumer {
 
 		logger.info("消息={}，处理结束。。。。", msg);
 	}
+	
 }

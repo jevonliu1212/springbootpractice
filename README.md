@@ -199,9 +199,9 @@ spring.http.multipart.max-request-size=128KB
 
 #### 8. 整合ActiveMQ
 
-配置类似redis，配置ActiveMQ相关参数，使用template模版对象JmsMessagingTemplate即可向指定队列发送消息，接收方使用监听器（@JmsListener注解即可）监听队列，即可消费队列里的内容。
+配置类似 `redis`，配置 `ActiveMQ` 相关参数，使用 `template` 模版对象 `JmsMessagingTemplate` 即可向指定队列发送消息，接收方使用监听器（ `@JmsListener` 注解即可）监听队列，即可消费队列里的内容。
 
-application.properties配置:
+`application.properties`配置:
 
 ``` xml
 
@@ -210,3 +210,5 @@ spring.activemq.in-memory=true
 spring.activemq.pool.enabled=false
 
 ```
+
+需要开启 `topic` 功能需要另外添加 `spring.jms.pub-sub-domain=true`，因为 `spring boot` 默认 `topic` 是关闭的。

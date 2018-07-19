@@ -12,6 +12,7 @@ public class Producer {
 	@Autowired
 	private JmsMessagingTemplate jmsTemplate; 
 	
+	
 	public void send(Destination destination, final String message){
 		jmsTemplate.convertAndSend(destination,message);
 	}
