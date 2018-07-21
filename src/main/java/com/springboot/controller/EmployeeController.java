@@ -48,11 +48,11 @@ public class EmployeeController {
 		logger.info("查询人员信息id={}",id);
 		logger.debug("debug...查询人员信息id={}",id);
 		
-		Map<String,Object> postData = new HashMap<>();
-		postData.put("id", 1);
-		postData.put("name", "222");
-		postData.put("mobile","444");
-		System.out.println("=========="+restTemplate.postForEntity("http://localhost:8888/emp/update", postData, null));
+//		Map<String,Object> postData = new HashMap<>();
+//		postData.put("id", 1);
+//		postData.put("name", "222");
+//		postData.put("mobile","444");
+//		System.out.println("=========="+restTemplate.postForEntity("http://localhost:8888/emp/update", postData, null));
 		
 		//Future<String> res = asyncService.asyncTest();
 		//logger.info("future====={}",res.get());

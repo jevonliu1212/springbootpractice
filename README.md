@@ -215,3 +215,9 @@ spring.activemq.pool.enabled=false
 
 - **Topic**:通过该消息传递模型，应用程序能够将一条消息发送给多个消息消费者。在此传送模型中，消息目的地类型是主题。消息首先由消息生产者发布至消息服务器中特定的主题中，然后由消息服务器将消息传送至所有已订阅此主题的消费者。开启 `topic` 功能需要另外添加 `spring.jms.pub-sub-domain=true`，因为 `spring boot` 默认 `topic` 是关闭的。
 
+#### 9. 拦截器
+
+拦截器可以拦截指定格式的请求，可以在请求开始前后添加一些行为，对应的方法都封装了`HttpServletRequest` 对象，可以获取需要的请求信息，拦截时发现请求不符合业务需求时可以直接抛异常或者返回 `false` 阻止请求执行下去。配置拦截器的步骤：
+
+- 定义拦截器：定义一个类，继承 `HandlerInterceptorAdapter` 实现对应的 `preHandle` 和 `postHandle` 等方法。
+- 注册拦截器：定义拦截器后需要托管给 `spring` 才能生效，定义一个配置类，实现接口   `WebMvcConfigurerAdapter` 实现 `addInterceptors` 将定义的拦截器注册生效，还可以定义`pattern` 来指定需要拦截的请求，比如/**表示所有请求等等。
