@@ -19,6 +19,7 @@ public class AccountController {
 	@Autowired
 	RedisDao redisDao;
 	
+	
 	@RequestMapping(value = "/add",method = RequestMethod.POST)
 	public void add(@RequestParam("name")String name,@RequestParam("money")double money){
 		Account account = new Account();
