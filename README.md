@@ -221,3 +221,23 @@ spring.activemq.pool.enabled=false
 
 - 定义拦截器：定义一个类，继承 `HandlerInterceptorAdapter` 实现对应的 `preHandle` 和 `postHandle` 等方法。
 - 注册拦截器：定义拦截器后需要托管给 `spring` 才能生效，定义一个配置类，实现接口   `WebMvcConfigurerAdapter` 实现 `addInterceptors` 将定义的拦截器注册生效，还可以定义`pattern` 来指定需要拦截的请求，比如/**表示所有请求等等。
+
+#### 10. ApplicationRunner和CommandLineRunner
+有时候系统会需要这样一个需求，就是在系统启动完成前进行一些操作，比如查询数据缓存起来，这时候就会用到 `ApplicationRunner` 和 `CommandLineRunner` ，定义一个类实现这两个接口中任意一个都可以实现这种功能，具体的逻辑写在对应的run方法里。当有多个runner时可以通过@Order注解来指定执行顺序，数字越小优先级越高，两种runner都可以使用。
+
+扩展：除了使用这两个接口之外，使用监听器也可以完成类似的功能，监听器可以监听不同是的event，如果我们监听ApplicationReadyEvent事件，也可以实现在项目启动完成前进行一些操作。具体使用方法：1.定义自己的event，需要继承ApplicationEvent类。2.定义一个类，定义一个监听的方法，方法入参即需要监听的event对象，同时需要加上@EventListener注解。
+
+``` java
+
+import org.springframework.context.ApplicationEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
+
+@Component
+public class MyEventHandler {
+
+	@EventListener
+	public void listener(ApplicationEvent event){
+		System.out.println("application event。。。。。。。。。。。。。。。"+event.getClass().getName());
+	}
+}
