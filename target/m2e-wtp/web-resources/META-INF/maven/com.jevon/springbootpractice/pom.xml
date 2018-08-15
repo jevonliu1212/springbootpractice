@@ -85,6 +85,11 @@
             <artifactId>spring-retry</artifactId>
         </dependency>
         
+        <dependency>
+            <groupId>com.jevon</groupId>
+            <artifactId>test-starter</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         
 	</dependencies>
 
