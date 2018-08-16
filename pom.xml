@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.jevon</groupId>
 	<artifactId>springbootpractice</artifactId>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>springbootpractice Maven Webapp</name>
 	<url>http://maven.apache.org</url>
@@ -86,10 +86,15 @@
         </dependency>
         
         <dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+        
+        <!-- <dependency>
             <groupId>com.jevon</groupId>
             <artifactId>test-starter</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+        </dependency> -->
         
 	</dependencies>
 
