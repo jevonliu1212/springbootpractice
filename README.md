@@ -241,10 +241,11 @@ public class MyEventHandler {
 		System.out.println("application event。。。。。。。。。。。。。。。"+event.getClass().getName());
 	}
 }
+```
 
-#### 10. websocket
+#### 11. websocket  
 
-websocket为浏览器和服务器提供了双工异步通信的功能，有别于http只能由浏览器向服务器发起请求，这里主要STOMP协议下的websocket通信。首先需要定义一个endpoint，用于sockjs来连接，被请求的接口使用@MessageMapping注解，用户类似@RequestMapping，可以配合@SendTo，这个注解是会将接口返回值发送到指定地址，订阅了这个地址的就可以接收到信息，此外使用SimpMessagingTemplate也能完成向指定地址发送消息，使用更方便。@SubscribeMapping注解内包含一个被订阅的地址，一旦这个地址被订阅，被注解的方法就会被调用。
+`websocket` 为浏览器和服务器提供了双工异步通信的功能，有别于 `http` 只能由浏览器向服务器发起请求，这里主要 `STOMP` 协议下的 `websocket` 通信。首先需要定义一个 `endpoint` ，用于 `sockjs` 来连接，被请求的接口使用 `@MessageMapping` 注解，用户类似 `@RequestMapping` ，可以配合 `@SendTo` ，这个注解是会将接口返回值发送到指定地址，订阅了这个地址的就可以接收到信息，此外使用 `SimpMessagingTemplate` 也能完成向指定地址发送消息，使用更方便。 `@SubscribeMapping` 注解内包含一个被订阅的地址，一旦这个地址被订阅，被注解的方法就会被调用。
 
 ``` java
 
@@ -260,3 +261,4 @@ websocket为浏览器和服务器提供了双工异步通信的功能，有别�
 		System.out.println("XXX用户订阅了我。。。");
         return new Response("感谢你订阅了我。。。");
     }
+```
