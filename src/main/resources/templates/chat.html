@@ -50,7 +50,7 @@
 	        /**  订阅了/user/queue/notifications 发送的消息,这里雨在控制器的 convertAndSendToUser 定义的地址保持一致, 
 	         *  这里多用了一个/user,并且这个user 是必须的,使用user 才会发送消息到指定的用户。 
 	         *  */
-	        stomp.subscribe("/user/"+self+"/queue/notifications", handleNotification);
+	        stomp.subscribe("/"+self+"/queue/notifications", handleNotification);
 	    });
    }
 

@@ -31,8 +31,7 @@ public class WebSocketController {
         return new Response("感谢你订阅了我。。。");
     }
 	
-	@RequestMapping("/chat1")
-    @ResponseBody
+	@MessageMapping("/chat1")
     public String say2(Message message)throws Exception
     {
         ws.sendMessage(message);
