@@ -31,11 +31,11 @@ public class WebSocketController {
         return new Response("感谢你订阅了我。。。");
     }
 	
-	@RequestMapping("/welcome")
+	@RequestMapping("/chat1")
     @ResponseBody
-    public String say2()throws Exception
+    public String say2(Message message)throws Exception
     {
-        ws.sendMessage();
+        ws.sendMessage(message);
         return "is ok";
     }
 }

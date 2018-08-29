@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8" />
+<head>
+    <title>Home</title>
+    <script src="/sockjs.min.js"></script>
+<script src="/stomp.min.js"></script>
+<script src="/jquery.js"></script>
+</head>
+<body>
+<p>
+    聊天室
+</p>
+
+<form id="wiselyForm">
+    <textarea rows="4" cols="60" name="text"></textarea>
+    <input type="submit"/><input type="button" value="connect" id="connect"/>
+    <input type="text" id="user"/>
+    <input type="text" id="self"/>
+    <input type="button" value="target" id="target"/>
+    
+</form>
+
+<script th:inline="javascript">
+   var user="";
+
+   $('#connect').click(function(e){
+	   connect();
+   });
+   
+   $('#target').click(function(e){
+	   user = $('#user').val();
+   });
+   
+    $('#wiselyForm').submit(function(e){
+        e.preventDefault();
+        var text = $('#wiselyForm').find('textarea[name="text"]').val();
+        sendSpittle(text);
+    });
+    
+    var stomp=null;
+   function connect(){
+	   var self = $('#self').val();
+	 //链接endpoint名称为 "/endpointChat" 的endpoint。
+	    var sock = new SockJS("/endpoint1");
+	    stomp = Stomp.over(sock);
+	    stomp.connect({}, function(frame) {
+	    	console.log('Connected----: ' + frame);
+	        /**  订阅了/user/queue/notifications 发送的消息,这里雨在控制器的 convertAndSendToUser 定义的地址保持一致, 
+	         *  这里多用了一个/user,并且这个user 是必须的,使用user 才会发送消息到指定的用户。 
+	         *  */
+	        stomp.subscribe("/user/"+self+"/queue/notifications", handleNotification);
+	    });
+   }
+
+    function handleNotification(message) {
+    	console.log('receice----: ' + message);
+        $('#output').append("<b>Received: " + message.body + "</b><br/>")
+    }
+
+    function sendSpittle(text) {
+    	 user =$('#user').val();
+    	 console.log('stomp----: ' + stomp);
+        stomp.send("/chat1", {}, JSON.stringify({ 'name': text ,'user':user}));//3
+    }
+    $('#stop').click(function() {sock.close()});
+</script>
+
+<div id="output"></div>
+</body>
+</html>
