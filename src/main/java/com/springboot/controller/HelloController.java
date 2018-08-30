@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.config.MyConfig;
+import com.springboot.service.AsyncService;
 
 @RestController
 @EnableConfigurationProperties({MyConfig.class})
@@ -17,9 +18,16 @@ public class HelloController {
 	
 	@Autowired
 	private MyConfig config;
+	@Autowired
+	private AsyncService asyncService;
 	
 	@RequestMapping("/")
 	public String helloWord(){
 		return "Hello World,"+name+","+config.getAge()+","+config.getUuid();
+	}
+	
+	@RequestMapping("/async")
+	public void async(){
+		asyncService.asyncTest();
 	}
 }

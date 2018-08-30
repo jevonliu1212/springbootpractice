@@ -15,12 +15,12 @@ public class AsyncService {
 
 	private final static Logger logger = LoggerFactory.getLogger(AsyncService.class);
 	
-	@Async
+	@Async("asyncServiceExecutor")
 	public Future<String> asyncTest(){
 		logger.info("异步调用asyncTest..........开始");
 		
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

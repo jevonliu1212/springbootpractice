@@ -16,6 +16,7 @@ public class WebSocketService {
 	public void sendMessage(Message message) throws Exception{
             Thread.sleep(1500);
             System.out.println("send==========="+JSON.toJSONString(message));
-            template.convertAndSendToUser(message.getUser(), "/queue/notifications", message.getName());
+           // template.convertAndSendToUser(message.getUser(), "/queue/notifications", message.getName());
+            template.convertAndSend("/queue/notifications/"+message.getUser(), message.getName());
     }
 }
