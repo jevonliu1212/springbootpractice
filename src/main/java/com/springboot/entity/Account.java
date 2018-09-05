@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Account {
@@ -11,7 +12,7 @@ public class Account {
 	@Id
     @GeneratedValue
 	private Integer id;
-	
+	@Size(max=4)
 	private String name;
 	
 	private Double money;
