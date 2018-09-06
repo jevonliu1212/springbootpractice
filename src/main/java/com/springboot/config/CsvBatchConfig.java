@@ -29,8 +29,10 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import com.springboot.batch.CsvBeanValidator;
 import com.springboot.batch.CsvItemProcessor;
+import com.springboot.batch.CsvItemProcessor1;
 import com.springboot.batch.CsvJobListener;
 import com.springboot.entity.Account;
+import com.springboot.entity.Employee;
 
 @Configuration
 @EnableBatchProcessing
@@ -56,6 +58,25 @@ public class CsvBatchConfig {
     }
 	
 	@Bean
+    public ItemReader<Employee> reader1(){
+		System.out.println("reader....");
+        // 使用FlatFileItemReader 读取文件
+        FlatFileItemReader<Employee> reader = new FlatFileItemReader<Employee>();
+        reader.setResource(new ClassPathResource("people.csv"));
+
+        reader.setLineMapper(new DefaultLineMapper<Employee>(){{
+            setLineTokenizer(new DelimitedLineTokenizer(){{
+                setNames(new String[]{"name","mobile"});
+            }}); 
+            setFieldSetMapper(new BeanWrapperFieldSetMapper<Employee>(){{
+                setTargetType(Employee.class);
+            }});
+        }});
+
+        return reader;
+    }
+	
+	@Bean
     public ItemProcessor<Account, Account> processor(){
         CsvItemProcessor processor = new CsvItemProcessor();
         processor.setValidator(csvBeanValidator());
@@ -63,10 +84,22 @@ public class CsvBatchConfig {
     }
 	
 	@Bean
+    public ItemProcessor<Employee, Employee> processor1(){
+        CsvItemProcessor1 processor = new CsvItemProcessor1();
+        processor.setValidator(csvBeanValidator1());
+        return processor;
+    }
+	
+	
+	@Bean
     public Validator<Account> csvBeanValidator(){
         return new CsvBeanValidator<Account>();
     }
 	
+	@Bean
+    public Validator<Employee> csvBeanValidator1(){
+        return new CsvBeanValidator<Employee>();
+    }
 	
 	@Bean
     public ItemWriter<Account> writer(DataSource dataSource){
@@ -74,6 +107,18 @@ public class CsvBatchConfig {
         writer.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<Account>());
         String sql = "insert into account(name, remark,money) "
                                     + "values (:name, :remark,:money)";
+
+        writer.setSql(sql);
+        writer.setDataSource(dataSource);
+        return writer;
+    }
+	
+	@Bean
+    public ItemWriter<Employee> writer1(DataSource dataSource){
+        JdbcBatchItemWriter<Employee> writer = new JdbcBatchItemWriter<Employee>();
+        writer.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<Employee>());
+        String sql = "insert into employee(name,mobile) "
+                                    + "values (:name,:mobile)";
 
         writer.setSql(sql);
         writer.setDataSource(dataSource);
@@ -117,10 +162,11 @@ public class CsvBatchConfig {
 
 
     @Bean
-    public Job importJob(JobBuilderFactory jobs, Step step){
+    public Job importJob(JobBuilderFactory jobs, Step personStep,Step personStep1){
         return jobs.get("importJob")
                 .incrementer(new RunIdIncrementer())
-                .flow(step) // 为Job指定Step
+                .flow(personStep)
+                .next(personStep1)// 为Job指定Step
                 .end()
                 .listener(csvJobListener()) // 绑定监听器
                 .build();
@@ -131,6 +177,17 @@ public class CsvBatchConfig {
                                 ItemReader<Account> reader, ItemWriter<Account> writer, ItemProcessor<Account, Account> processor){
         return stepBuilderFactory.get("personStep")
                 .<Account, Account>chunk(5000) // 批处理每次提交5000条数据
+                .reader(reader) // 给step绑定reader
+                .processor(processor) // 给step绑定processor
+                .writer(writer) // 给step绑定writer
+                .build();
+    }
+    
+    @Bean
+    public Step personStep1(StepBuilderFactory stepBuilderFactory, 
+                                ItemReader<Employee> reader, ItemWriter<Employee> writer, ItemProcessor<Employee, Employee> processor){
+        return stepBuilderFactory.get("personStep1")
+                .<Employee, Employee>chunk(5000) // 批处理每次提交5000条数据
                 .reader(reader) // 给step绑定reader
                 .processor(processor) // 给step绑定processor
                 .writer(writer) // 给step绑定writer
