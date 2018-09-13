@@ -124,6 +124,13 @@
             <artifactId>hibernate-validator</artifactId>
         </dependency>
         
+        <!-- 状态机 -->
+        <dependency>
+			<groupId>org.springframework.statemachine</groupId>
+			<artifactId>spring-statemachine-core</artifactId>
+			<version>1.2.0.RELEASE</version>
+		</dependency>
+        
 	</dependencies>
 
 	<build>
