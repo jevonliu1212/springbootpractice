@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class CommandLineRunner2 implements CommandLineRunner {
 
 	private final static Logger logger = LoggerFactory.getLogger(CommandLineRunner2.class);

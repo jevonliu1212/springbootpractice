@@ -7,7 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
-@Component
+//@Component
 public class MyApplicationStartedEventListener implements ApplicationListener<ApplicationStartedEvent> {
 
 	private final static Logger logger = LoggerFactory.getLogger(MyApplicationStartedEventListener.class);

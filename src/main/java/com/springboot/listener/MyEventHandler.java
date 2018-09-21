@@ -4,7 +4,7 @@ import org.springframework.context.ApplicationEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class MyEventHandler {
 
 	@EventListener
