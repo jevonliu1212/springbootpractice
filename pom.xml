@@ -80,10 +80,10 @@
 		    <version>1.2.5</version>
 		</dependency>
         
-        <dependency>
+        <!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-activemq</artifactId>
-		</dependency>
+		</dependency> -->
         
         <!-- Spring Retry -->
         <dependency>
@@ -125,11 +125,17 @@
         </dependency>
         
         <!-- 状态机 -->
-        <dependency>
+        <!-- <dependency>
 			<groupId>org.springframework.statemachine</groupId>
 			<artifactId>spring-statemachine-core</artifactId>
 			<version>1.2.0.RELEASE</version>
-		</dependency>
+		</dependency> -->
+		
+		<dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring-boot-starter-basic</artifactId>
+            <version>6.0.0</version>
+        </dependency>
         
 	</dependencies>
 

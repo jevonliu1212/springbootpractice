@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-@Configuration
+//@Configuration
 @EnableAsync
 public class ExecutorConfig {
 	private static final Logger logger = LoggerFactory.getLogger(ExecutorConfig.class);

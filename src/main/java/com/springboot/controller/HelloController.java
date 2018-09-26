@@ -18,16 +18,16 @@ public class HelloController {
 	
 	@Autowired
 	private MyConfig config;
-	@Autowired
-	private AsyncService asyncService;
+//	@Autowired
+//	private AsyncService asyncService;
 	
 	@RequestMapping("/")
 	public String helloWord(){
 		return "Hello World,"+name+","+config.getAge()+","+config.getUuid();
 	}
 	
-	@RequestMapping("/async")
-	public void async(){
-		asyncService.asyncTest();
-	}
+//	@RequestMapping("/async")
+//	public void async(){
+//		asyncService.asyncTest();
+//	}
 }

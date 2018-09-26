@@ -40,8 +40,8 @@ public class EmployeeController {
 	private EmployeeMapper employeeMapper;
 	@Autowired
 	private RestTemplate restTemplate;
-	@Autowired
-	private AsyncService asyncService;
+	//@Autowired
+//	private AsyncService asyncService;
 	
 	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
 	public Employee getById(@PathVariable("id")long id) throws InterruptedException, ExecutionException{
@@ -107,15 +107,15 @@ public class EmployeeController {
         return "true";
 	}
 	
-	@RequestMapping(value = "/retry",method = RequestMethod.GET)
-	public void update(){
-		logger.info("retry controller............");
-		try {
-			asyncService.retry();
-		} catch (Exception e) {
-			logger.error("retry Exception..........");
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	@RequestMapping(value = "/retry",method = RequestMethod.GET)
+//	public void update(){
+//		logger.info("retry controller............");
+//		try {
+//			asyncService.retry();
+//		} catch (Exception e) {
+//			logger.error("retry Exception..........");
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 }

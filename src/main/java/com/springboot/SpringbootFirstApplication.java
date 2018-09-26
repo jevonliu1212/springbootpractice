@@ -9,35 +9,30 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.statemachine.StateMachine;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import com.springboot.statemachine.bean.Events;
 import com.springboot.statemachine.bean.States;
 
 @SpringBootApplication
 //@EnableScheduling
-@EnableAsync
+//@EnableAsync
 @EnableRetry
-public class SpringbootFirstApplication implements CommandLineRunner {
+public class SpringbootFirstApplication  {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext ctx = SpringApplication.run(SpringbootFirstApplication.class, args);
 	}
 
-	@Autowired
-	private StateMachine<States, Events> stateMachine;
-	
-	@Override
-	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
-		stateMachine.start();
-		stateMachine.sendEvent(Events.PAY);
-		stateMachine.sendEvent(Events.RECEIVE);
+	@Primary
+	@Bean
+	public TaskExecutor primaryTaskExecutor() {
+	    ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+	    return executor;
 	}
-	
-
-
 }

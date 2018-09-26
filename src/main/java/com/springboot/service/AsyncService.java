@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 public class AsyncService {
 
 	private final static Logger logger = LoggerFactory.getLogger(AsyncService.class);
